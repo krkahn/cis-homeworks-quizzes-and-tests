@@ -31,7 +31,7 @@ A high-priority thread is waiting on a lock owned by a low-priority thread. If t
 char* doubleup(char* string){
         //static char string2[40] = {0};           // zero initialized, this is not thread safe
         char *string2 = malloc(strlen(string)*2);
-        for(unsigned i=0, j=0, len = strlen(string); i<len; i++) {
+        for(size_t i=0, j=0, len = strlen(string); i<len; i++) {
             string2[j++] = string[i];
             string2[j++] = string[i];
         }
