@@ -1,0 +1,47 @@
+cis4307, Fall 2009
+10 Minute Test # 1
+September 10, 2009
+
+
+(10) 1. Implement the lock operation of spinlocks using the CompareAndSwap instruction.
+
+Compare-and-swap atomically compares the contents of a memory location to a given value and, only if they are the same, modifies the contents of that memory location to a given new value.
+
+void lock(int *lock_var){
+	while (!CAS(*lock_var, false, true));
+}
+
+The compare and swap instruction (CAS) is similar to, but more complicated than, the test_and_set instruction. The CAS instruction takes three parameters: a location, an "expected value" for that location, and a new value for the location.
+
+It checks that the contents of the location match the expected value. If so, it replaces them with the new value, but if not it has no effect. In any case, the previous value of the variable is returned, Compare and swap is usually used when you need high performance (low latency) thread communication.
+
+(10) 2. Spinlocks suffer of the Priority Inversion problem.
+	Describe in detail what it is.
+
+A high-priority thread is waiting on a lock owned by a low-priority thread. If the low priority thread can't make progress then the high priority thread can't make progress either. It's blocked.
+
+(15) 3.	Implement in C the function char * doubleup(const char * s)
+	which, given a string s, returns a new string consisting of s with each
+        character repeated twice. So doubleup("nabucco") is "nnaabbuuccccoo".
+
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+
+char* doubleup(char* string){
+        //static char string2[40] = {0};           // zero initialized, this is not thread safe
+        char *string2 = malloc(strlen(string)*2);
+        for(unsigned i=0, j=0, len = strlen(string); i<len; i++) {
+            string2[j++] = string[i];
+            string2[j++] = string[i];
+        }
+        return string2;
+        free(string2);
+}
+
+int main(){
+        char *str = "hello";
+        printf("%s\n",doubleup(str));
+        char *str2 = "works";
+        printf("%s\n",doubleup(str2));
+}

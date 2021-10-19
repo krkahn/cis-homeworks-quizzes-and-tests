@@ -1,0 +1,54 @@
+cis4307, Fall 2009
+5 (15) Minute Test #10
+December 3, 2009
+
+
+1. (10)  Consider atomicity in a distributed system. What is the new 
+	 problem respect a single system, and how it solved?
+
+Atomicity means all work in a single transaction being treated as a single atomic unit. A 
+complex operation where multiple parties are taking action either absolutely happens
+or absolutely does not happen. It can't happen in part. This is an operation whose execution
+is performed as an individual action. 
+
+2. (5) How can I securely set up a password with an authenticated server?
+
+This question seems ambiguous. If you are on a website and setting up a password you 
+are likely doing so over encrypted HTTP, that is, HTTP encrypted with TLS: HTTPS. You are 
+making requests to the server to create a password for your username and having the request
+sent to an email address or some other form of authentication that is distinctly yours. 
+
+3.  (5) Describe the difference between physical and logical clocks, and why 
+	logical clocks suffice in many circumstances.
+
+A physical clock is any type of clock implemented in either software or hardware whose job
+it is to keep track of the passage of time. A logical clock is any type of clock that keeps track of events in 
+some system. It's tracking all causal and chronological relationships in a distribued system. 
+Logical clocks are sufficient because they maintain consistent ordering of events within some
+virtual timespan, they capture monotonicty that is associated with causality in distributed
+systems. 
+
+4. (15) Implement in C the function 
+	   int longest(const char * a, const char *b)
+	which returns the length of of the longest substring of a and b.
+	For example, given "rosangela" and "roangieka" returns 3.
+
+int lcsubstr(char* str1,char* str2)
+{
+      int ans = 0;
+
+        for (int i = 0; i < strlen(str1); i++)
+        {
+         for (int j = 0; j < strlen(str2); j++) {
+                int k = 0;
+                while ((i + k) < strlen(str1) && (j + k) < strlen(str2) && str1[i + k] == str2[j + k])
+                {
+                        k = k + 1;
+                }
+                ans = max(ans, k);
+           }
+        }
+      return ans;
+}
+
+// This solution is iterative and I believe it runs in O(2^n) time. 
