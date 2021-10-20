@@ -1,0 +1,36 @@
+cis4307, Fall 2009
+5 Minute Test # 3
+September 24, 2009
+
+
+1. (10)	We have seen that Unix keeps in memory for an open file both an inode
+	and a v-node. What is the purpose of the v-node?
+
+2. (5)	How does the shell execute something like
+		% foo
+
+3. (15) Given the definition 
+	   typedef struct Node { struct Node *left; struct Node *right; int value} node;
+	Implement in C the function int largest(node *root); 
+	which, given the root of a tree, returns the largest value stored in the tree 
+	rooted at root.
+
+// requires limits.h
+//https://www.cplusplus.com/reference/climits/
+int largest(node *root){
+    // Base case
+    if (root == NULL)
+        return INT_MIN;
+
+    // Return maximum of 3 values:
+    // 1) Root's data 2) Max in Left Subtree
+    // 3) Max in right subtree
+    int res = root->value;
+    int lres = largest(root->left);
+    int rres = largest(root->right);
+    if (lres > res)
+        res = lres;
+    if (rres > res)
+        res = rres;
+    return res;
+}

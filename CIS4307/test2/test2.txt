@@ -1,0 +1,53 @@
+cis4307, Fall 2009
+10 Minute Test # 2
+September 17, 2009
+
+
+1. (10)	(a) My program reads from the terminal with non-blocking behavior - what 
+	    does it mean? Is this the default behavior?
+	(b) My program writes to disk synchronously - what does it mean? Is this the default
+	    behavior?
+
+a. When an I/O operation is non-blocking for the user, the OS lets the user process continue immediately after it has intitated the corresponding hardware operation. You need a notification mechanism for the user process to get notified when the operation completes. 
+
+b. Synchronous I/O means something like a process or thread that initiates I/O also waits for the I/O to complete. When it is complete, that thread or process moves on to do something else. Behavior is dependent: If your filesystem is not mounted with sync then it will return as long as data has been copied to the kernel. Once there's no more buffer space it will block until there's free buffer space. If the filesystem is mounted with sync then it will block. 
+
+synchronous / asynchronous is to describe the relation between two modules.
+blocking / non-blocking is to describe the situation of one module.
+
+An example:
+Module X: "I".
+Module Y: "bookstore".
+X asks Y: do you have a book named "c++ primer"?
+
+    blocking: before Y answers X, X keeps waiting there for the answer. Now X (one module) is blocking. X and Y are two threads or two processes or one thread or one process? we DON'T know.
+
+    non-blocking: before Y answers X, X just leaves there and do other things. X may come back every two minutes to check if Y has finished its job? Or X won't come back until Y calls him? We don't know. We only know that X can do other things before Y finishes its job. Here X (one module) is non-blocking. X and Y are two threads or two processes or one process? we DON'T know. BUT we are sure that X and Y couldn't be one thread.
+
+    synchronous: before Y answers X, X keeps waiting there for the answer. It means that X can't continue until Y finishes its job. Now we say: X and Y (two modules) are synchronous. X and Y are two threads or two processes or one thread or one process? we DON'T know.
+
+    asynchronous: before Y answers X, X leaves there and X can do other jobs. X won't come back until Y calls him. Now we say: X and Y (two modules) are asynchronous. X and Y are two threads or two processes or one process? we DON'T know. BUT we are sure that X and Y couldn't be one thread.
+
+    blocking: OMG, I'm frozen! I can't move! I have to wait for that specific event to happen. If that happens, I would be saved!
+    non-blocking: I was told that I had to wait for that specific event to happen. OK, I understand and I promise that I would wait for that. But while waiting, I can still do some other things, I'm not frozen, I'm still alive, I can jump, I can walk, I can sing a song etc.
+
+    synchronous: My mom is gonna cook, she sends me to buy some meat. I just said to my mom: We are synchronous! I'm so sorry but you have to wait even if I might need 100 years to get some meat back...
+    asynchronous: We will make a pizza, we need tomato and cheeze. Now I say: Let's go shopping. I'll buy some tomatoes and you will buy some cheeze. We needn't wait for each other because we are asynchronous.
+
+2. (10)	Describe the interface between the Standard C IO layer and the Unix IO layer.
+
+C is a language and Unix is an OS, therefore you are using standard library functions when you use C IO. You are essentially using wrappers around system calls, sometimes they are thin wrappers. 
+
+3. (15) Implement in C the function void printBytes(int n)
+	which, given an integer n, prints one per line the bytes of n [you choose in 
+	which order, but tell me what you are doing].
+
+// You extract each byte by ANDing the int with the right mask. 
+void printBytes(int n){
+        // given an integer n prints out one per line the bytes of n
+        int a = (n>>24)   & 0xff; // bits 24-31
+        int b = (n>>16)   & 0xff; // bits 16-23
+        int c = (n>>8)    & 0xff; // bits 8-15
+        int d =  n        & 0xff; // bits 0-7
+        printf("%x\t%x\t%x\t%x\n",a,b,c,d);
+}
