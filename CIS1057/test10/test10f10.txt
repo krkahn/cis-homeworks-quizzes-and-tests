@@ -1,0 +1,43 @@
+CIS1057
+FIVE MINUTE TEST #10
+November 30, 2010
+
+
+
+
+(10)	1. Declare a structure Student to represent information about a 
+	   student: first name, last name, student number, grade (a real 
+	   number)
+
+
+
+
+
+
+
+
+
+
+(10)	2. (a) We call a function with a single integer parameter. 
+	       What will be passed to the function in a function call?
+	   (b) Now we pass an integer array. What will be passed to 
+	       the function in a function call?
+	   (c) Now we pass a structure. What will be passed to the
+	       function in a function call?
+
+
+
+
+
+
+
+
+
+(15)	3. void insert(int n, int a[n], int level, int v) is a function
+	   that, given an integer array a with n positions of which the 
+	   first level positions are occupied in sorted order, inserts v 
+	   in a so that it remains sorted. 
+	   
+
+
+
