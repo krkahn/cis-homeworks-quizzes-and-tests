@@ -1,0 +1,43 @@
+CIS1057
+FIVE MINUTE TEST #11
+December 7, 2010
+
+
+
+
+(10)	1. We want to represent in our program a book, with title,
+	   author, publisher, price. How would you do it? be precise,
+	   i.e. write a definition in C.
+
+struct book {
+  char title[100];
+  char author[100];
+  char publisher[100];
+  float price;
+};
+
+Implemented like:
+
+struct book my_book;
+my_book.price = 19.99;
+strcpy(my_book.title, "The Catcher in the Rye");
+strcpy(my_book.author, "J.D. Salinger");
+strcpy(my_book.publisher, "Little, Brown and Company");
+
+(10)    2. (a) What is a stub?
+	   (b) What is a driver?
+	   (c) What do we find in a file with name like foo.h?
+
+(a): In software development, a "stub" is a small piece of code that serves as a placeholder for a larger piece of functionality that has not yet been implemented. A stub typically provides a simplified or incomplete version of the functionality it represents, and is used to test and debug other parts of the software system that depend on that functionality.
+
+(b): In software development, a "driver" is a piece of code that is used to test and debug another piece of code, typically a function or module. A driver provides input parameters to the code being tested, and captures the output or side-effects of that code, allowing the developer to verify that it is working correctly.
+
+(c):  file with the name "foo.h" is typically a header file in the C or C++ programming languages. Header files contain declarations of functions, variables, and other entities that are used by one or more source code files in a program. Header files are typically included at the beginning of a source code file using the preprocessor directive #include, which causes the contents of the header file to be inserted into the source code file during compilation.
+
+(20)	3. Given a file, say moo.txt, whose lines contain a part number,
+	   say a 12 character field, and a cost, say a double value,
+	   write the function  void raisePrice(char * filename)
+	   that reads all the lines and prints them out with the price of 
+	   the items raised by 5%.
+
+See attached C.
