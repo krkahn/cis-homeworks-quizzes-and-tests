@@ -9,13 +9,14 @@ November 30, 2010
 	   student: first name, last name, student number, grade (a real 
 	   number)
 
+#include <string>
 
-
-
-
-
-
-
+struct student {
+  std::string studentFirstName = "";
+  std::string studentLastName= "";
+  int studentNumber = 0;
+  float grade = 0.0;
+}
 
 
 (10)	2. (a) We call a function with a single integer parameter. 
@@ -25,10 +26,9 @@ November 30, 2010
 	   (c) Now we pass a structure. What will be passed to the
 	       function in a function call?
 
-
-
-
-
+2a. void callfunction(int a)
+2b. void callfunction(std::vector<int>& vec)
+2c. void callfunction(struct structure)
 
 
 
@@ -38,6 +38,20 @@ November 30, 2010
 	   first level positions are occupied in sorted order, inserts v 
 	   in a so that it remains sorted. 
 	   
-
-
-
+void insert(int n, int a[n], int level, int v) {
+    // find the position to insert v
+    int pos = level;
+    while (pos < n && a[pos] < v) {
+        pos++;
+    }
+    // shift the elements after pos to the right
+    for (int i = n - 1; i > pos; i--) {
+        a[i] = a[i - 1];
+    }
+    // insert v at the correct position
+    a[pos] = v;
+}
+The function first finds the position to insert v by iterating over the sorted elements from index level to n-1.
+It then shifts all elements after that position to the right by one index to make space for v.
+Finally, it inserts v at the correct position. Note that the function assumes that the
+first level elements of a are already sorted.
